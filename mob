@@ -29,5 +29,5 @@ Co-authored-by: $MOBBER_1
 Co-authored-by: $MOBBER_2";;
 
 n|NO|N|no)
- exit 0 ;;
+exit 0 ;;
 esac
