@@ -1,0 +1,33 @@
+#!/bin/bash
+
+example="Joe Bloggs <joe.bloggs@engineerbetter.com>"
+
+if [[ ! $MOBBER_1 ]]; then
+    echo "Please export MOBBER_1 eg. 'export MOBBER_1=$example'"
+    exit 0
+fi
+if [[ ! $MOBBER_2 ]]; then
+    echo "Please export MOBBER_2 eg 'export MOBBER_2=$example'"
+    exit 0
+fi
+
+commit_message=$*
+
+echo "$commit_message"
+echo
+echo Co-authored-by: "$MOBBER_1"
+echo Co-authored-by: "$MOBBER_2"
+echo
+echo "Commit this? (Yes/No) "
+read -r response
+
+case $response in
+y|Y|YES|yes)
+git commit -m "$commit_message
+
+Co-authored-by: $MOBBER_1
+Co-authored-by: $MOBBER_2";;
+
+n|NO|N|no)
+ exit 0 ;;
+esac
