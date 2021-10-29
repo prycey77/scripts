@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+IP=$(curl -s http://whatismyip.akamai.com/)
+SECURITY_GROUP="sg-0d3c7e263a80012be"
+PROFILE="default"
+
+echo "Adding $IP to AWS security group $SECURITY_GROUP"
+# Authorize access on ports 22, 6868 and 25555
+for port in "22" "6868" "25555" ;
+    do
+    echo $port
+        aws ec2 authorize-security-group-ingress --group-id $SECURITY_GROUP --protocol tcp --port $port --cidr $IP/32 --profile $PROFILE --no-cli-pager
+    done
